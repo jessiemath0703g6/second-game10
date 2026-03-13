@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Jessie Math捷析 - 分數與小數的四則運算</title>
+
+  <meta name="description" content="© 2025–2026 Jessie Math 捷析老師. All rights reserved.">
+  <meta property="og:title" content="Jessie Math捷析 - 分數與小數的四則運算">
+  <meta property="og:description" content="© 2025–2026 Jessie Math 捷析老師. All rights reserved.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="g6-u10.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1536">
+  <meta property="og:image:alt" content="Jessie Math 遊戲封面">
+  <link rel="image_src" href="g6-u10.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jessie Math捷析 - 分數與小數的四則運算">
+  <meta name="twitter:description" content="© 2025–2026 Jessie Math 捷析老師. All rights reserved.">
+  <meta name="twitter:image" content="g6-u10.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    :root {
+      --bg-base: #f8f5f0;
+      --bg-card: rgba(255, 255, 255, .7);
+      --glass: rgba(255, 255, 255, .45);
+      --ink: #2d3436;
+      --muted: #636e72;
+      --accent: #6c5ce7;
+      --accent-soft: #a29bfe;
+      --green: #00b894;
+      --red: #ff7675;
+      --warn: #fdcb6e;
+
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .05);
+      --shadow-hover: 0 20px 40px rgba(108, 92, 231, .1);
+    }
+
+    * { box-sizing: border-box; transition: all .28s cubic-bezier(.25, .46, .45, .94); }
+    html, body { height: 100%; margin: 0; }
+    body {
+      color: var(--ink);
+      font-family: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
+      background-color: var(--bg-base);
+      background-image:
+        radial-gradient(at 0% 0%, rgba(108, 92, 231, .05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(253, 203, 110, .05) 0px, transparent 50%);
+      overflow-x: hidden;
+    }
+
+    /* ===== 手機強制橫向提示 ===== */
+    #landscapeWarning {
+      display: none;
+      position: fixed; inset: 0; z-index: 99999;
+      background: var(--accent); color: white;
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 20px;
+    }
+    #landscapeWarning i { font-size: 64px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out; }
+    @keyframes rotatePhone { 0% { transform: rotate(0deg); } 50% { transform: rotate(-90deg); } 100% { transform: rotate(-90deg); } }
+    @media (max-width: 767px) and (orientation: portrait) {
+      #landscapeWarning { display: flex; }
+    }
+
+    /* ===== Hero (加上指定背景圖 jessie logo.jpg) ===== */
+    .hero {
+      position: sticky; top: 0; z-index: 100;
+      /* 混合白色半透明遮罩與 jessie logo.jpg 背景 */
+      background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('jessie logo.jpg') center/cover;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, .06);
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-badge {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 3px solid #f39c12; background: transparent;
+      overflow: hidden; display: grid; place-items: center; flex: 0 0 auto;
+    }
+    .brand-badge img { width: 100%; height: 100%; object-fit: cover; display: block; background: transparent; }
+    .brand-title { font-family: "Fredoka"; font-weight: 700; font-size: 28px; color: #1f2937; letter-spacing: .2px; white-space: nowrap; }
+    .nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+    .pill {
+      text-decoration: none; color: #1f2937; font-weight: 800; font-size: 14px;
+      padding: 10px 16px; border-radius: 999px; background: #fff;
+      border: 1px solid rgba(0, 0, 0, .10); display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .05); white-space: nowrap;
+    }
+    .pill:hover { transform: translateY(-1px); border-color: rgba(108, 92, 231, .45); box-shadow: 0 10px 24px rgba(0, 0, 0, .08); }
+    .pill.outline { border: 2px solid rgba(108, 92, 231, .65); background: #fff; color: #2f2a7a; }
+    .pill.outline:hover { border-color: rgba(108, 92, 231, 1); }
+
+    /* ===== Layout ===== */
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 34px 20px; }
+    .card {
+      background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, .6);
+      box-shadow: var(--shadow); overflow: hidden; position: relative;
+    }
+    .card-hd { padding: 22px 24px; border-bottom: 1px solid rgba(0, 0, 0, .03); display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .card-title h1 { margin: 0; font-size: 20px; font-weight: 900; color: var(--accent); }
+    .sub { margin: 4px 0 0; color: var(--muted); font-size: 14px; font-weight: 700; }
+    .tag {
+      background: #fff; padding: 6px 12px; border-radius: 99px; font-size: 11px;
+      font-weight: 900; border: 1px solid rgba(0, 0, 0, .05); color: var(--muted);
+      display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+    }
+    .input {
+      width: 100%; padding: 14px 20px; border-radius: var(--radius-md);
+      border: 2px solid transparent; background: #fff; font-size: 16px;
+      font-weight: 900; box-shadow: inset 0 2px 4px rgba(0, 0, 0, .02); text-align: center;
+    }
+    .input:focus { outline: none; border-color: var(--accent-soft); box-shadow: 0 0 0 4px rgba(108, 92, 231, .10); }
+    .btn {
+      padding: 12px 24px; border-radius: var(--radius-md); border: none; cursor: pointer;
+      font-weight: 1000; font-size: 15px; display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: var(--shadow); background: #fff; color: var(--ink); justify-content: center;
+    }
+    .btn.primary { background: var(--accent); color: #fff; }
+    .btn.primary:hover { background: #5649c0; transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .btn.ghost { background: rgba(0, 0, 0, .04); }
+    .btn.danger { background: rgba(255, 118, 117, .12); color: #b23b3a; }
+    .btn:disabled { opacity: .55; cursor: not-allowed; transform: none !important; }
+
+    .level {
+      background: #fff; padding: 16px; border-radius: var(--radius-md);
+      border: 1px solid rgba(0, 0, 0, .03); display: flex; align-items: center; gap: 16px;
+      cursor: pointer; margin-bottom: 12px;
+    }
+    .level:hover { transform: scale(1.02); border-color: var(--accent-soft); }
+    .badge {
+      width: 48px; height: 48px; border-radius: 14px; background: rgba(108, 92, 231, .10);
+      display: grid; place-items: center; color: var(--accent); font-size: 20px; flex: 0 0 auto;
+    }
+    .chip {
+      padding: 10px 18px; border-radius: 99px; background: #fff;
+      border: 1px solid rgba(0, 0, 0, .05); font-weight: 1000; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; user-select: none; white-space: nowrap;
+    }
+    .chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* ===== 分數顯示 ===== */
+    .frac { display: inline-flex; align-items: center; gap: 6px; vertical-align: middle; }
+    .fstack { display: inline-flex; flex-direction: column; align-items: center; line-height: 1; min-width: 28px; transform: translateY(1px); }
+    .fstack .top, .fstack .bot { font-size: .86em; font-weight: 1000; }
+    .fstack .line { width: 100%; height: 2px; background: var(--ink); margin: 4px 0; opacity: .9; }
+    .op { font-weight: 1000; color: var(--accent); margin: 0 10px; }
+
+    /* ===== Welcome ===== */
+    .welcome-shell { min-height: calc(100vh - 78px); display: grid; place-items: center; padding: 22px 0 40px; }
+    .welcome-card { width: min(920px, 96vw); border-radius: 32px; background: rgba(255, 255, 255, .72); border: 1px solid rgba(0, 0, 0, .05); box-shadow: 0 20px 60px rgba(0, 0, 0, .08); padding: 54px 22px 46px; text-align: center; }
+    .big-title { margin: 0; font-size: 42px; font-weight: 1000; letter-spacing: .6px; color: #2c2c2c; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .big-title .title-icon { width: 44px; height: 44px; border-radius: 16px; background: rgba(108, 92, 231, .10); border: 1px solid rgba(108, 92, 231, .18); display: grid; place-items: center; color: var(--accent); box-shadow: 0 10px 24px rgba(108, 92, 231, .10); }
+    .big-sub { margin: 16px 0 0; font-size: 16px; font-weight: 800; color: #6b7280; }
+    .welcome-form { width: min(420px, 92%); margin: 26px auto 0; }
+    .rules { width: min(560px, 92%); margin: 18px auto 0; text-align: left; background: rgba(0, 0, 0, .02); border: 1px solid rgba(0, 0, 0, .06); border-radius: 18px; padding: 14px 16px; }
+    .rules h3 { margin: 0 0 8px; font-size: 13px; font-weight: 1000; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+    .rules ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.85; font-weight: 800; color: var(--muted); }
+    .rules .mini { margin-top: 10px; font-size: 12px; font-weight: 900; color: #6b7280; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .mini-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(255, 255, 255, .7); border: 1px solid rgba(0, 0, 0, .06); box-shadow: 0 8px 18px rgba(0, 0, 0, .04); white-space: nowrap; }
+
+    /* ===== Game HUD / Options ===== */
+    .meter { height: 10px; background: rgba(0, 0, 0, .05); border-radius: 99px; overflow: hidden; flex-grow: 1; }
+    .bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-soft)); width: 100%; transform-origin: left; }
+    .question { font-size: 28px; font-weight: 1000; text-align: center; margin: 26px 0 18px; color: var(--ink); letter-spacing: 1px; overflow-wrap: anywhere; z-index: 2; position: relative; }
+    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; z-index: 2; position: relative; }
+    .opt { background: #fff; border: 1px solid rgba(0, 0, 0, .06); border-radius: 18px; padding: 14px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 6px 18px rgba(0, 0, 0, .04); font-weight: 1000; min-height: 60px; }
+    .opt:hover { transform: translateY(-2px); border-color: rgba(108, 92, 231, .35); }
+    .opt .label { width: 36px; height: 36px; border-radius: 12px; background: rgba(108, 92, 231, .10); color: var(--accent); display: grid; place-items: center; font-weight: 1000; flex: 0 0 auto; }
+    .opt .val { font-size: 20px; display: flex; justify-content: center; flex: 1; }
+    .opt.correct { border-color: rgba(0, 184, 148, .45); box-shadow: 0 12px 24px rgba(0, 184, 148, .12); }
+    .opt.wrong { border-color: rgba(255, 118, 117, .55); box-shadow: 0 12px 24px rgba(255, 118, 117, .10); }
+    .opt:disabled { opacity: .6; cursor: not-allowed; transform: none !important; }
+
+    .feedback { border-radius: var(--radius-md); padding: 14px 16px; margin-top: 14px; display: none; text-align: center; font-weight: 1000; line-height: 1.6; z-index: 2; position: relative; }
+    .feedback.show { display: block; animation: slideIn .25s ease; }
+    .fb-ok { background: rgba(0, 184, 148, .10); color: var(--green); }
+    .fb-bad { background: rgba(255, 118, 117, .10); color: var(--red); }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== Whiteboard Canvas ===== */
+    .wb-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; border-radius: var(--radius-lg); overflow: hidden; }
+    #whiteboard { width: 100%; height: 100%; cursor: crosshair; }
+    .wb-controls { position: absolute; bottom: 20px; right: 20px; z-index: 11; display: flex; gap: 8px; }
+    .wb-btn { padding: 8px 12px; border-radius: 99px; font-weight: 900; border: none; cursor: pointer; background: rgba(255,255,255,0.9); box-shadow: var(--shadow); color: var(--accent); font-size: 13px; }
+    .wb-btn.active { background: var(--accent); color: white; }
+
+    /* ===== Review Table ===== */
+    .review-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 24px; }
+    .review-table th, .review-table td { padding: 12px; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .review-table th { background: rgba(0,0,0,0.02); color: var(--muted); font-weight: 900; white-space: nowrap; }
+    .review-table td { font-weight: 1000; }
+    .review-table td.correct { color: var(--green); }
+    .review-table td.wrong { color: var(--red); }
+    .review-wrap { max-height: 400px; overflow-y: auto; }
+
+    /* ===== Overlay ===== */
+    #pauseOverlay {
+      position: fixed; inset: 0; background: rgba(255, 255, 255, .65); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px); display: none; place-items: center; z-index: 2000; padding: 18px;
+    }
+
+    /* ===== Footer Pill ===== */
+    footer { padding: 34px 20px 44px; display: flex; justify-content: center; }
+    .footer-pill { width: min(980px, 96vw); border-radius: 999px; background: rgba(255, 255, 255, .75); border: 1px solid rgba(0, 0, 0, .06); box-shadow: 0 16px 40px rgba(0, 0, 0, .06); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    .footer-left, .footer-right { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .footer-dot { width: 10px; height: 10px; border-radius: 999px; background: rgba(108, 92, 231, .85); box-shadow: 0 0 0 6px rgba(108, 92, 231, .10); flex: 0 0 auto; }
+    .footer-copy, .footer-tagline { font-weight: 900; color: #334155; font-size: 12px; white-space: nowrap; }
+    .footer-icon { width: 28px; height: 28px; border-radius: 12px; background: rgba(0, 0, 0, .04); border: 1px solid rgba(0, 0, 0, .06); display: grid; place-items: center; color: #334155; flex: 0 0 auto; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1024px) { .wrap { padding: 28px 16px; } .hero-inner { padding: 12px 16px; } }
+    @media (max-width: 900px) { .options { grid-template-columns: 1fr; } .big-title { font-size: 36px; } #pageMenu .grid { grid-template-columns: 1fr !important; } }
+    @media (max-width: 680px) {
+      .hero-inner { align-items: flex-start; } .brand-title { font-size: 24px; } .pill { padding: 9px 12px; font-size: 13px; }
+      .welcome-card { padding: 44px 18px 38px; } .card-hd { padding: 18px 18px; } .footer-pill { border-radius: 24px; padding: 14px 14px; }
+      .footer-copy, .footer-tagline { white-space: normal; }
+    }
+    @media (max-width: 420px) { .big-title { font-size: 32px; } .question { font-size: 24px; } .opt .val { font-size: 18px; } }
+  </style>
+</head>
+
+<body>
+  <div id="landscapeWarning">
+    <i class="fa-solid fa-mobile-screen-button"></i>
+    <h2>請旋轉手機</h2>
+    <p>為了獲得最佳遊戲體驗，請將設備旋轉至橫向遊玩。</p>
+  </div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="brand">
+        <div class="brand-badge"><img src="JESSIEMATH-Q.png" alt="Jessie Math"></div>
+        <div class="brand-title">Jessie Math捷析</div>
+      </div>
+      <nav class="nav">
+        <a class="pill" href="https://jessiemath0703-chu.github.io/website2/" target="_blank" rel="noopener">
+          <i class="fa-solid fa-house"></i><span>首頁</span>
+        </a>
+        <a class="pill" href="https://jessiemath0703-chu.github.io/Game-Lobby/" target="_blank" rel="noopener">
+          <i class="fa-solid fa-gamepad"></i><span>遊戲大廳</span>
+        </a>
+        <a class="pill outline" href="https://jessiemath0703-chu.github.io/Game-Lobby/#g6-u10" target="_blank" rel="noopener">
+          <i class="fa-solid fa-rotate-left"></i><span>分數與小數的四則運算</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="pageWelcome" class="page">
+      <div class="welcome-shell">
+        <div class="welcome-card">
+          <h1 class="big-title">
+            <span class="title-icon" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+            分數與小數的四則運算
+          </h1>
+          <p class="big-sub">輸入名字，挑戰你的計算 Combo！</p>
+          <div class="welcome-form">
+            <input id="nameInput" class="input" placeholder="請輸入名字（必填）" maxlength="14" />
+            <div style="margin-top:16px;">
+              <button id="btnGoMenu" class="btn primary" style="width:100%;">下一步</button>
+            </div>
+          </div>
+          <div class="rules">
+            <h3><i class="fa-solid fa-compass"></i> 遊戲說明</h3>
+            <ul>
+              <li>進入主選單後先選擇「關卡」與「速度」，按下<strong>開始</strong>即可進入挑戰。</li>
+              <li>本遊戲擁有<strong>洗牌題庫機制</strong>，同回合內題目豐富且不重複。</li>
+              <li>混合分數與小數的四則運算，並用<strong>括號</strong>與<strong>運算順序</strong>增加變化。</li>
+              <li>遊戲內提供「透明計算白板」，可直接在畫面上做計算。</li>
+            </ul>
+            <div class="mini" aria-label="計時與計分摘要">
+              <span class="mini-pill"><i class="fa-solid fa-clock"></i> 倒數：慢速 90s／標準 60s／高速 45s</span>
+              <span class="mini-pill"><i class="fa-solid fa-star"></i> 計分：答對加分 + 連對加成</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pageMenu" class="page" style="display:none;">
+      <div class="grid" style="display:grid; grid-template-columns:1.1fr .9fr; gap:24px;">
+        <div class="card">
+          <div class="card-hd">
+            <div class="card-title">
+              <h1>主選單</h1>
+              <p class="sub" id="playerTag">玩家：—</p>
+            </div>
+            <span class="tag"><i class="fa-solid fa-layer-group"></i> 任務配置</span>
+          </div>
+          <div class="card-bd" style="padding:24px;">
+            <div id="levelList"></div>
+            <p style="font-weight:1000; font-size:14px; margin:18px 0 10px;">速度（難易度）：</p>
+            <div id="diffChips" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;"></div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button id="btnEnterGame" class="btn primary"><i class="fa-solid fa-play"></i> 開始</button>
+              <button id="btnBackToWelcome" class="btn ghost"><i class="fa-solid fa-arrow-left"></i> 返回</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-hd">
+            <div class="card-title">
+              <h1>排行榜</h1>
+              <p class="sub">此瀏覽器的紀錄 (Top 10)</p>
+            </div>
+            <span class="tag"><i class="fa-solid fa-trophy"></i> 名人堂</span>
+          </div>
+          <div class="card-bd" style="padding:0; overflow-x: auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+              <thead style="background:rgba(0,0,0,.02); color:var(--muted);">
+                <tr>
+                  <th style="padding:14px; white-space:nowrap;">名次</th>
+                  <th style="white-space:nowrap;">玩家</th>
+                  <th style="white-space:nowrap;">關卡</th>
+                  <th style="white-space:nowrap;">挑戰時間</th>
+                  <th style="white-space:nowrap;">分數</th>
+                  <th style="padding:14px; white-space:nowrap;">日期</th>
+                </tr>
+              </thead>
+              <tbody id="boardBody" style="text-align:center; font-weight:1000;"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pageGame" class="page" style="display:none;">
+      <div class="card" style="max-width:860px; margin:0 auto; position: relative;">
+        <div class="wb-container" id="wbContainer">
+          <canvas id="whiteboard"></canvas>
+        </div>
+        <div class="wb-controls">
+          <button id="btnToggleWb" class="wb-btn"><i class="fa-solid fa-pen"></i> 開啟計算白板</button>
+          <button id="btnClearWb" class="wb-btn" style="display:none;"><i class="fa-solid fa-eraser"></i> 清除</button>
+        </div>
+
+        <div class="card-hd" style="position: relative; z-index: 2;">
+          <div style="display:flex; align-items:center; gap:14px; flex:1;">
+            <div class="tag" style="background:var(--accent); color:#fff; border:none;">
+              <i class="fa-solid fa-clock"></i> <span id="timeTxt">60</span>s
+            </div>
+            <div class="meter"><div class="bar" id="timeBar"></div></div>
+          </div>
+          <div style="text-align:right;">
+            <p class="sub" style="margin:0;">SCORE</p>
+            <p id="scoreTxt" style="font-size:24px; font-weight:1000; margin:0; color:var(--accent);">0</p>
+          </div>
+        </div>
+
+        <div class="card-bd" style="padding:34px; position: relative; z-index: 2;">
+          <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center;">
+            <span class="tag" id="qMeta"><i class="fa-solid fa-satellite-dish"></i> 題目載入中…</span>
+            <span class="tag"><i class="fa-solid fa-fire"></i> 連對：<span id="streakTxt">0</span></span>
+          </div>
+
+          <div class="question" id="questionTxt"></div>
+          <div class="options" id="optionsGrid"></div>
+          <div id="feedback" class="feedback"></div>
+
+          <div style="margin-top:18px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button id="btnPause" class="btn ghost"><i class="fa-solid fa-pause"></i> 暫停</button>
+              <button id="btnRestart" class="btn ghost"><i class="fa-solid fa-rotate-right"></i> 重來</button>
+              <button id="btnFinishEarly" class="btn danger"><i class="fa-solid fa-flag-checkered"></i> 結束並看復盤</button>
+            </div>
+            <span class="tag" id="diffTag"><i class="fa-solid fa-gauge-high"></i> 速度：—</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pageReview" class="page" style="display:none;">
+      <div class="card" style="max-width:920px; margin:0 auto;">
+        <div class="card-hd">
+          <div class="card-title">
+            <h1>📝 遊戲復盤</h1>
+            <p class="sub">回顧你的作答紀錄</p>
+          </div>
+          <div style="text-align:right;">
+             <p class="sub" style="margin:0;">本次得分</p>
+             <p id="reviewScore" style="font-size:24px; font-weight:1000; margin:0; color:var(--accent);">0</p>
+          </div>
+        </div>
+        <div class="card-bd" style="padding:24px;">
+          <div class="review-wrap">
+            <table class="review-table">
+              <thead>
+                <tr>
+                  <th>題號</th>
+                  <th>題目</th>
+                  <th>你的答案</th>
+                  <th>正確答案</th>
+                  <th>結果</th>
+                </tr>
+              </thead>
+              <tbody id="reviewBody"></tbody>
+            </table>
+          </div>
+          <div style="text-align:center; margin-top: 16px;">
+            <button id="btnReviewToMenu" class="btn primary"><i class="fa-solid fa-list"></i> 回主選單</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="pauseOverlay">
+    <div class="card" style="width:340px; padding:28px; text-align:center;">
+      <h2 style="color:var(--accent); font-weight:1000; margin:0 0 8px;">已暫停</h2>
+      <p class="sub" style="margin:0 0 18px;">題目已遮蔽，專注回來再戰。</p>
+      <button id="btnResume" class="btn primary" style="width:100%; justify-content:center;">
+        <i class="fa-solid fa-play"></i> 繼續
+      </button>
+      <div style="height:10px;"></div>
+      <button id="btnPauseBackMenu" class="btn ghost" style="width:100%; justify-content:center;">
+        <i class="fa-solid fa-flag-checkered"></i> 結束並看復盤
+      </button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-pill">
+      <div class="footer-left">
+        <div class="footer-dot" aria-hidden="true"></div>
+        <div class="footer-copy">© 2025–2026 Jessie Math 捷析老師. All rights reserved.</div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-icon" aria-hidden="true"><i class="fas fa-compass"></i></div>
+        <div class="footer-tagline">數學不迷路，捷析Jessie 帶你走向理解。</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (sel) => document.querySelector(sel);
+
+    const LEVELS = [
+      { id:1, title:"分數四則", desc:"加減乘除｜分數為主", icon:"fa-pizza-slice" },
+      { id:2, title:"小數四則", desc:"小數混入｜答案仍用分數", icon:"fa-calculator" },
+      { id:3, title:"混合運算", desc:"分數 × 小數 × 括號", icon:"fa-shuffle" },
+      { id:4, title:"括號與順序", desc:"括號先算｜乘除優先", icon:"fa-code" },
+      { id:5, title:"終極任務", desc:"高變化連擊", icon:"fa-crown" }
+    ];
+
+    const DIFFS = [
+      { id:"slow", name:"慢速", icon:"fa-feather", time:90, base:10, addTime:2 },
+      { id:"normal", name:"標準", icon:"fa-gauge", time:60, base:12, addTime:1 },
+      { id:"fast", name:"高速", icon:"fa-bolt", time:45, base:14, addTime:0 }
+    ];
+
+    let state = {
+      player: "", levelId: 1, diffId: "normal",
+      timeLeft: 60, score: 0, streak: 0,
+      running: false, timerId: null,
+      playTime: 0, startTime: 0,
+      qPool: [], history: [], q: null, lock: false,
+      wbEnabled: false
+    };
+
+    /* ===== Rational Math ===== */
+    function gcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ [a,b]=[b,a%b]; } return a||1; }
+    function normRat(n,d){
+      if(d===0) return {n:NaN,d:1};
+      if(d<0){ n=-n; d=-d; }
+      const g=gcd(n,d);
+      return {n:n/g,d:d/g};
+    }
+    function addRat(a,b){ return normRat(a.n*b.d + b.n*a.d, a.d*b.d); }
+    function subRat(a,b){ return normRat(a.n*b.d - b.n*a.d, a.d*b.d); }
+    function mulRat(a,b){ return normRat(a.n*b.n, a.d*b.d); }
+    function divRat(a,b){ return normRat(a.n*b.d, a.d*b.n); }
+    function eqRat(a,b){ return a.n===b.n && a.d===b.d; }
+    function ltRat(a,b){ return (a.n*b.d) < (b.n*a.d); }
+    function isNeg(r){ return r.n < 0; }
+
+    function parseDecimalToRat(str){
+      const s=String(str).trim();
+      if(!/^\d+(\.\d+)?$/.test(s)) return null;
+      if(!s.includes('.')) return normRat(parseInt(s,10),1);
+      const [ip,fp]=s.split('.');
+      const scale=Math.pow(10,fp.length);
+      const n=parseInt(ip,10)*scale + parseInt(fp,10);
+      return normRat(n, scale);
+    }
+
+    function ratToPrettyDecimal(r){
+      const x=r.n/r.d;
+      const s=(Math.round(x*1e6)/1e6).toString();
+      if(s.includes('.')) return s.replace(/0+$/,'').replace(/\.$/,'');
+      return s;
+    }
+
+    /* ===== Display Helpers ===== */
+    function fracHTML(n,d){
+      return `<span class="frac"><span class="fstack"><span class="top">${n}</span><span class="line"></span><span class="bot">${d}</span></span></span>`;
+    }
+    function renderExprTokens(tokens){
+      return tokens.map(t=>{
+        if(t.type==='op') return `<span class="op">${t.v}</span>`;
+        if(t.type==='paren') return `<span class="op">${t.v}</span>`;
+        if(t.type==='rat') return fracHTML(t.n,t.d);
+        if(t.type==='num') return `<span>${t.v}</span>`;
+        return `<span>${t.v}</span>`;
+      }).join('');
+    }
+
+    /* ===== Question Generators ===== */
+    function rint(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+    function chance(p){ return Math.random() < p; }
+
+    function makeProperFrac(maxD){
+      const d=rint(2,maxD); const n=rint(1,d-1);
+      return normRat(n,d);
+    }
+    function makeImproperFrac(maxD){
+      const d=rint(2,maxD); const n=rint(d+1, d*3 + rint(0,d-1));
+      return normRat(n,d);
+    }
+    function makeMixedFrac(maxD){
+      const w=rint(1,6); const f=makeProperFrac(maxD);
+      return normRat(w*f.d + f.n, f.d);
+    }
+    function makeNiceDecimalRat(){
+      const options=[
+        normRat(1,4), normRat(1,2), normRat(3,4), normRat(1,5), normRat(2,5),
+        normRat(3,5), normRat(4,5), normRat(1,8), normRat(3,8), normRat(5,8),
+        normRat(7,8), normRat(3,10), normRat(7,10), normRat(9,10), normRat(11,10), normRat(25,10)
+      ];
+      return pick(options);
+    }
+
+    function applyOpNonNeg(a,op,b){
+      if(op==='+') return addRat(a,b);
+      if(op==='×') return mulRat(a,b);
+      if(op==='÷') return divRat(a,b);
+      if(op==='-'){ if(ltRat(a,b)) [a,b]=[b,a]; return subRat(a,b); }
+      return a;
+    }
+
+    function genNumber(levelId, maxD){
+      const roll=Math.random();
+      const preferDecimal = (levelId===2) || (levelId===3 && roll<0.6) || (levelId>=4 && roll<0.5);
+
+      if(preferDecimal){
+        let r;
+        if(chance(0.5)){
+          r=makeNiceDecimalRat();
+        } else {
+          const two = chance(0.4);
+          const val = two ? (rint(120, 2500)/100).toFixed(2) : (rint(12, 1500)/10).toFixed(1);
+          r=parseDecimalToRat(val);
+        }
+        return { r, t:[{type:'num', v:ratToPrettyDecimal(r)}] };
+      }
+
+      const f = chance(0.4) ? makeProperFrac(maxD) : chance(0.5) ? makeImproperFrac(maxD) : makeMixedFrac(maxD);
+      return { r:f, t:[{type:'rat', n:f.n, d:f.d}] };
+    }
+
+    function createOneQuestion(levelId, diffId){
+      const maxTry=200;
+      const maxD = (diffId==="fast") ? 24 : (diffId==="normal" ? 20 : 16);
+      const templates = [
+        ()=>{
+          const a=genNumber(levelId,maxD), b=genNumber(levelId,maxD), c=genNumber(levelId,maxD);
+          const op1=pick(['+','-','×','÷']), op2=pick(['+','-','×','÷']);
+          if(op1==='÷' && b.r.n===0) b.r=normRat(1,2);
+          if(op2==='÷' && c.r.n===0) c.r=normRat(1,4);
+          const useParen = (levelId>=4) && chance(0.75);
+          let tokens, ans;
+          if(useParen && chance(0.5)){
+            let aR=a.r, bR=b.r; if(op1==='-' && ltRat(aR,bR)) [aR,bR]=[bR,aR];
+            tokens=[{type:'paren',v:'('}, ...a.t, {type:'op',v:op1}, ...b.t, {type:'paren',v:')'}, {type:'op',v:op2}, ...c.t];
+            ans=applyOpNonNeg(applyOpNonNeg(aR,op1,bR), op2, c.r);
+          } else if(useParen){
+            let bR=b.r, cR=c.r; if(op2==='-' && ltRat(bR,cR)) [bR,cR]=[cR,bR];
+            tokens=[...a.t, {type:'op',v:op1}, {type:'paren',v:'('}, ...b.t, {type:'op',v:op2}, ...c.t, {type:'paren',v:')'}];
+            ans=applyOpNonNeg(a.r, op1, applyOpNonNeg(bR,op2,cR));
+          } else {
+            let aR=a.r, bR=b.r; if(op1==='-' && ltRat(aR,bR)) [aR,bR]=[bR,aR];
+            tokens=[...a.t, {type:'op',v:op1}, ...b.t, {type:'op',v:op2}, ...c.t];
+            ans=applyOpNonNeg(applyOpNonNeg(aR,op1,bR), op2, c.r);
+          }
+          return { tokens, ansRat:ans, meta:`${LEVELS[levelId-1].title}｜隨機運算` };
+        },
+        ()=>{
+          const a=parseDecimalToRat((chance(0.5)?(rint(120,2500)/100):(rint(15,250)/10)).toFixed(chance(0.5)?2:1));
+          const f=chance(0.4)?makeImproperFrac(maxD):makeProperFrac(maxD);
+          const tokens=[{type:'num',v:ratToPrettyDecimal(a)},{type:'op',v:'÷'},{type:'rat',n:f.n,d:f.d}];
+          return { tokens, ansRat:divRat(a,f), meta:`小數直覺｜小數÷分數` };
+        },
+        ()=>{
+          const f1=chance(0.6)?makeImproperFrac(maxD):makeMixedFrac(maxD);
+          const d=makeNiceDecimalRat();
+          const f2=chance(0.6)?makeProperFrac(maxD):makeImproperFrac(maxD);
+          const op=pick(['+','-']);
+          let left=mulRat(f1,d), right=f2;
+          const tokens=[{type:'rat',n:f1.n,d:f1.d},{type:'op',v:'×'},{type:'num',v:ratToPrettyDecimal(d)},{type:'op',v:op},{type:'rat',n:f2.n,d:f2.d}];
+          return { tokens, ansRat: (op==='+')?addRat(left,right):applyOpNonNeg(left,'-',right), meta:`混合宇宙｜分數×小數` };
+        },
+        ()=>{
+          const a=genNumber(levelId,maxD), b=genNumber(levelId,maxD), c=genNumber(levelId,maxD);
+          const op1=pick(['+','-']), op2=pick(['×','÷']);
+          let bR=b.r, cR=c.r; if(op1==='-' && ltRat(bR,cR)) [bR,cR]=[cR,bR];
+          const tokens=[...a.t,{type:'op',v:op2},{type:'paren',v:'('},...b.t,{type:'op',v:op1},...c.t,{type:'paren',v:')'}];
+          return { tokens, ansRat: applyOpNonNeg(a.r, op2, applyOpNonNeg(bR,op1,cR)), meta:`順序守門人｜括號先算` };
+        },
+        ()=>{
+          const a=genNumber(levelId,maxD), b=genNumber(levelId,maxD), c=genNumber(levelId,maxD), d=genNumber(levelId,maxD);
+          const op1=pick(['+','-','×']), op2=pick(['+','-','×','÷']), op3=pick(['+','-','×']);
+          let aR=a.r, bR=b.r, cR=c.r, dR=d.r;
+          if(op1==='-' && ltRat(aR,bR)) [aR,bR]=[bR,aR];
+          if(op3==='-' && ltRat(cR,dR)) [cR,dR]=[dR,cR];
+          const tokens=[
+            {type:'paren',v:'('}, ...a.t,{type:'op',v:op1},...b.t,{type:'paren',v:')'},
+            {type:'op',v:op2},
+            {type:'paren',v:'('}, ...c.t,{type:'op',v:op3},...d.t,{type:'paren',v:')'}
+          ];
+          return { tokens, ansRat:applyOpNonNeg(applyOpNonNeg(aR,op1,bR), op2, applyOpNonNeg(cR,op3,dR)), meta:`括號迷航｜雙括號` };
+        }
+      ];
+
+      let pool = [];
+      if(levelId===1) pool=[templates[0],templates[0],templates[3],templates[4]];
+      else if(levelId===2) pool=[templates[1],templates[1],templates[0],templates[2],templates[3]];
+      else if(levelId===3) pool=[templates[2],templates[0],templates[1],templates[3],templates[4]];
+      else if(levelId===4) pool=[templates[3],templates[4],templates[0],templates[1]];
+      else pool=[templates[0],templates[1],templates[2],templates[3],templates[4]];
+
+      for(let i=0;i<maxTry;i++){
+        const q=pick(pool)();
+        const ans=normRat(q.ansRat.n,q.ansRat.d);
+        if(!Number.isFinite(ans.n) || !Number.isFinite(ans.d) || ans.d===0) continue;
+        if(isNeg(ans) || ans.d>180 || ans.n/ans.d > 50) continue;
+        return { ...q, ansRat: ans };
+      }
+      return { tokens:[{type:'rat',n:1,d:2},{type:'op',v:'+'},{type:'rat',n:1,d:4}], ansRat:normRat(3,4), meta:`${LEVELS[levelId-1].title}｜隨機運算` };
+    }
+
+    function shuffle(arr){
+      for(let i=arr.length-1; i>0; i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+      }
+      return arr;
+    }
+
+    function generateQPool(levelId, diffId) {
+      let arr = [];
+      for(let i=0; i<30; i++) arr.push(createOneQuestion(levelId, diffId));
+      return shuffle(arr);
+    }
+
+    /* ===== Options Generation ===== */
+    function ratKey(r){ return `${r.n}/${r.d}`; }
+    function makeDistractor(correct){
+      const patterns=[
+        ()=> normRat(correct.n + rint(1, Math.max(1, Math.min(6, Math.abs(correct.d)))), correct.d),
+        ()=> normRat(Math.max(0, correct.n - rint(1, Math.max(1, Math.min(6, Math.abs(correct.d))))), correct.d),
+        ()=> normRat(correct.n, Math.max(1, correct.d + rint(1,8))),
+        ()=> normRat(Math.max(1, correct.d), Math.max(1, correct.n||1)),
+        ()=> addRat(correct, normRat(rint(1,7), rint(2,24))),
+        ()=>{ const sub=normRat(rint(1,7), rint(2,24)); return ltRat(correct, sub) ? addRat(correct, sub) : subRat(correct, sub); }
+      ];
+      let r = patterns[rint(0,patterns.length-1)]();
+      r = normRat(r.n,r.d);
+      if(!Number.isFinite(r.n) || r.d===0) r = normRat(1,2);
+      if(isNeg(r)) r = normRat(Math.abs(r.n), r.d);
+      if(r.d>180) r = normRat(r.n, 180);
+      return normRat(r.n,r.d);
+    }
+    function buildOptions(correct){
+      const seen=new Set(); const opts=[];
+      function push(r){
+        const rr=normRat(r.n,r.d); if(isNeg(rr)) return false;
+        const k=ratKey(rr); if(seen.has(k)) return false;
+        seen.add(k); opts.push(rr); return true;
+      }
+      push(correct);
+      let guard=0;
+      while(opts.length<4 && guard<300){
+        guard++;
+        const d = makeDistractor(correct);
+        if(!Number.isFinite(d.n) || d.d===0 || isNeg(d) || eqRat(d, correct)) continue;
+        push(d);
+      }
+      while(opts.length<4) push(makeProperFrac(24));
+      return shuffle(opts);
+    }
+
+    /* ===== 排行榜 (Top 10) ===== */
+    const BOARD_KEY="JM_G6U10_BOARD_V6";
+    function levelTitleById(id){ const obj = LEVELS.find(x=>x.id===id); return obj ? obj.title : "—"; }
+    function loadBoard(){
+      try{
+        const raw=localStorage.getItem(BOARD_KEY);
+        const arr=raw?JSON.parse(raw):[];
+        return Array.isArray(arr)?arr:[];
+      }catch(e){ return []; }
+    }
+    function saveScore(name,score,levelId, playTime){
+      const now=new Date();
+      const date=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+      const levelTitle = levelTitleById(levelId);
+      const board=loadBoard();
+      board.push({name,score,date,levelId,levelTitle,playTime});
+
+      // 保留每人每關最高分，取前十名
+      const best=new Map();
+      for(const row of board){
+        const key = `${row.name}__${row.levelId || 0}`;
+        const prev=best.get(key);
+        if(!prev || row.score>prev.score) best.set(key,row);
+      }
+      const top10=Array.from(best.values()).sort((a,b)=>b.score-a.score).slice(0,10);
+      localStorage.setItem(BOARD_KEY, JSON.stringify(top10));
+    }
+
+    function medal(i){
+      if(i===0) return "🥇 第一名";
+      if(i===1) return "🥈 第二名";
+      if(i===2) return "🥉 第三名";
+      return `🏅 第${i+1}名`;
+    }
+    function escapeHTML(s){ return String(s).replace(/[&<>"']/g, (c)=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
+
+    function renderBoard(rows){
+      const body=$("#boardBody"); body.innerHTML="";
+      const list=(rows||[]).slice().sort((a,b)=>b.score-a.score).slice(0,10);
+      if(list.length===0){
+        body.innerHTML=`<tr><td colspan="6" style="padding:18px; color:var(--muted); font-weight:1000;">尚無紀錄，快來拿 🥇</td></tr>`;
+        return;
+      }
+      list.forEach((r,i)=>{
+        const tr=document.createElement("tr");
+        tr.innerHTML=`
+          <td style="padding:14px; white-space:nowrap;">${medal(i)}</td>
+          <td style="white-space:nowrap;">${escapeHTML(r.name)}</td>
+          <td style="white-space:nowrap; color:var(--muted); font-weight:1000;">${escapeHTML(r.levelTitle || levelTitleById(r.levelId))}</td>
+          <td style="white-space:nowrap; color:var(--muted); font-weight:1000;">${r.playTime ? r.playTime+'s' : '-'}</td>
+          <td style="color:var(--accent); font-weight:1000; white-space:nowrap;">${r.score}</td>
+          <td style="padding:14px; color:var(--muted); font-weight:1000; white-space:nowrap;">${r.date}</td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    /* ===== UI 控制 ===== */
+    function initMenuUI(){
+      const lvList=$("#levelList"); lvList.innerHTML="";
+      LEVELS.forEach((l,idx)=>{
+        const div=document.createElement("div"); div.className="level";
+        div.innerHTML=`<div class="badge"><i class="fa-solid ${l.icon}"></i></div><div><p style="margin:0; font-weight:1000;">${l.title}</p><p class="sub">${l.desc}</p></div>`;
+        div.onclick=()=>{
+          state.levelId=l.id;
+          document.querySelectorAll(".level").forEach(el=>el.style.borderColor="rgba(0,0,0,0.03)");
+          div.style.borderColor="var(--accent)";
+        };
+        lvList.appendChild(div);
+        if(idx===0) div.style.borderColor="var(--accent)";
+      });
+      const dfChips=$("#diffChips"); dfChips.innerHTML="";
+      DIFFS.forEach((d)=>{
+        const span=document.createElement("span"); span.className="chip";
+        span.innerHTML=`<i class="fa-solid ${d.icon}"></i> ${d.name}`;
+        span.onclick=()=>{
+          state.diffId=d.id;
+          document.querySelectorAll(".chip").forEach(el=>el.classList.remove("active"));
+          span.classList.add("active");
+        };
+        dfChips.appendChild(span);
+        if(d.id===state.diffId) span.classList.add("active");
+      });
+      renderBoard(loadBoard());
+    }
+
+    function showPage(id){
+      document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+      $("#"+id).style.display="block";
+      if(id === "pageGame") setTimeout(resizeWhiteboard, 50);
+    }
+    function getDiff(){ return DIFFS.find(d=>d.id===state.diffId) || DIFFS[1]; }
+
+    /* ===== 遊戲核心 ===== */
+    function clearTimer(){ if(state.timerId){ clearInterval(state.timerId); state.timerId=null; } }
+    
+    function startGame(){
+      const diff=getDiff();
+      state.timeLeft=diff.time; state.score=0; state.streak=0;
+      state.running=true; state.lock=false;
+      state.history = []; state.qPool = [];
+      state.startTime = Date.now();
+      
+      $("#diffTag").innerHTML=`<i class="fa-solid fa-gauge-high"></i> 速度：${diff.name}`;
+      updateHUD();
+      nextQuestion();
+      clearTimer();
+      state.timerId=setInterval(()=>{
+        if(!state.running) return;
+        state.timeLeft--;
+        updateHUD();
+        if(state.timeLeft<=0) handleGameOver();
+      }, 1000);
+    }
+
+    function handleGameOver() {
+       state.running = false; state.lock = true; clearTimer();
+       state.playTime = Math.floor((Date.now() - state.startTime) / 1000);
+       saveScore(state.player, state.score, state.levelId, state.playTime);
+       showReviewPage();
+    }
+
+    function showReviewPage() {
+       $("#reviewScore").innerText = state.score;
+       const tbody = $("#reviewBody"); tbody.innerHTML = "";
+       
+       if(state.history.length === 0) {
+           tbody.innerHTML = `<tr><td colspan="5" style="color:var(--muted);">此回合沒有作答紀錄</td></tr>`;
+       } else {
+           state.history.forEach((h, i) => {
+               const tr = document.createElement("tr");
+               tr.innerHTML = `
+                 <td>${i+1}</td>
+                 <td style="font-size: 1.2em;">${renderExprTokens(h.q)}</td>
+                 <td>${h.picked ? fracHTML(h.picked.n, h.picked.d) : '—'}</td>
+                 <td>${fracHTML(h.correct.n, h.correct.d)}</td>
+                 <td class="${h.isCorrect ? 'correct' : 'wrong'}">${h.isCorrect ? '✅ 答對' : '❌ 答錯'}</td>
+               `;
+               tbody.appendChild(tr);
+           });
+       }
+       showPage("pageReview");
+    }
+
+    function updateHUD(){
+      const diff=getDiff();
+      $("#timeTxt").innerText=state.timeLeft;
+      $("#scoreTxt").innerText=state.score;
+      $("#streakTxt").innerText=state.streak;
+      $("#timeBar").style.transform=`scaleX(${Math.max(0, state.timeLeft / diff.time)})`;
+    }
+
+    function disableOptions(disabled=true){
+      document.querySelectorAll(".opt").forEach(btn=>{ btn.disabled=disabled; btn.style.pointerEvents = disabled ? "none" : "auto"; });
+    }
+
+    function renderOptions(opts, correctRat){
+      const grid=$("#optionsGrid"); grid.innerHTML="";
+      const labels=["A","B","C","D"];
+      opts.forEach((r,idx)=>{
+        const btn=document.createElement("button"); btn.className="opt"; btn.type="button";
+        btn.innerHTML=`<span class="label">${labels[idx]}</span><span class="val">${fracHTML(r.n,r.d)}</span>`;
+        btn.onclick=()=> onPickOption(btn, r, correctRat);
+        grid.appendChild(btn);
+      });
+    }
+
+    function nextQuestion(){
+      $("#feedback").classList.remove("show");
+      state.lock=false; disableOptions(false);
+      
+      // 洗牌抽題邏輯
+      if(!state.qPool || state.qPool.length === 0) {
+        state.qPool = generateQPool(state.levelId, state.diffId);
+      }
+      const q = state.qPool.pop();
+      const correct=normRat(q.ansRat.n,q.ansRat.d);
+
+      $("#qMeta").innerText=q.meta;
+      $("#questionTxt").innerHTML=renderExprTokens(q.tokens);
+      renderOptions(buildOptions(correct), correct);
+      state.q={...q, ansRat:correct};
+    }
+
+    function onPickOption(btn, picked, correct){
+      if(state.lock || !state.running) return;
+      state.lock=true; disableOptions(true);
+      const ok=eqRat(picked, correct);
+      
+      // 記錄復盤資訊
+      state.history.push({ q: state.q.tokens, picked: picked, correct: correct, isCorrect: ok });
+
+      const fb = $("#feedback");
+      if(ok){
+        btn.classList.add("correct");
+        state.streak++; state.score += getDiff().base + Math.min(8, state.streak); state.timeLeft += getDiff().addTime;
+        updateHUD();
+        fb.innerHTML = "答對 ✅"; fb.className="feedback show fb-ok";
+        setTimeout(()=> { if(state.running) nextQuestion(); }, 700);
+      }else{
+        btn.classList.add("wrong"); state.streak=0; updateHUD();
+        const optsNodes = $("#optionsGrid").children;
+        for(let i=0; i<optsNodes.length; i++){
+           // 比對內部 HTML 找出正確按鈕亮起
+           if(optsNodes[i].innerHTML.includes(fracHTML(correct.n, correct.d))) {
+               optsNodes[i].classList.add("correct");
+           }
+        }
+        fb.innerHTML = `答錯 ❌ 正確答案：${fracHTML(correct.n, correct.d)}`; 
+        fb.className="feedback show fb-bad";
+        setTimeout(()=> { if(state.running) nextQuestion(); }, 1600);
+      }
+    }
+
+    /* ===== Canvas 計算白板 ===== */
+    const wb = document.getElementById('whiteboard');
+    const ctx = wb.getContext('2d');
+    let isDrawing = false, lastX = 0, lastY = 0;
+
+    function resizeWhiteboard() {
+       wb.width = wb.parentElement.clientWidth;
+       wb.height = wb.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeWhiteboard);
+
+    function startDraw(e) {
+       if(!state.wbEnabled) return;
+       isDrawing = true;
+       const rect = wb.getBoundingClientRect();
+       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+       lastX = clientX - rect.left; lastY = clientY - rect.top;
+    }
+    function doDraw(e) {
+       if(!isDrawing || !state.wbEnabled) return;
+       e.preventDefault(); // 防止滾動
+       const rect = wb.getBoundingClientRect();
+       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+       const x = clientX - rect.left; const y = clientY - rect.top;
+       
+       ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(x, y);
+       ctx.strokeStyle = '#6c5ce7'; ctx.lineWidth = 3; ctx.lineCap = 'round';
+       ctx.stroke();
+       lastX = x; lastY = y;
+    }
+    function stopDraw() { isDrawing = false; }
+
+    wb.addEventListener('mousedown', startDraw); wb.addEventListener('mousemove', doDraw);
+    wb.addEventListener('mouseup', stopDraw); wb.addEventListener('mouseout', stopDraw);
+    wb.addEventListener('touchstart', startDraw, {passive: false}); 
+    wb.addEventListener('touchmove', doDraw, {passive: false});
+    wb.addEventListener('touchend', stopDraw);
+
+    $("#btnToggleWb").onclick = function() {
+       state.wbEnabled = !state.wbEnabled;
+       const container = $("#wbContainer");
+       if(state.wbEnabled) {
+          container.style.pointerEvents = "auto";
+          container.style.background = "rgba(255,255,255,0.2)"; // 微幅背景提示已開啟
+          this.classList.add("active");
+          this.innerHTML = '<i class="fa-solid fa-pen-slash"></i> 關閉計算白板(作答)';
+          $("#btnClearWb").style.display = "inline-block";
+       } else {
+          container.style.pointerEvents = "none";
+          container.style.background = "transparent";
+          this.classList.remove("active");
+          this.innerHTML = '<i class="fa-solid fa-pen"></i> 開啟計算白板';
+          $("#btnClearWb").style.display = "none";
+       }
+    };
+    $("#btnClearWb").onclick = () => ctx.clearRect(0, 0, wb.width, wb.height);
+
+    /* ===== 暫停 / 離開 / 事件 ===== */
+    $("#btnGoMenu").onclick=()=>{
+      const name=$("#nameInput").value.trim(); if(!name) return alert("請先輸入名字");
+      state.player=name; $("#playerTag").innerText=`玩家：${name}`;
+      initMenuUI(); showPage("pageMenu");
+    };
+    $("#btnBackToWelcome").onclick=()=> showPage("pageWelcome");
+    $("#btnEnterGame").onclick=()=>{ showPage("pageGame"); startGame(); };
+    $("#btnPause").onclick=()=> { if(state.running){ state.running=false; $("#pauseOverlay").style.display="grid"; } };
+    $("#btnResume").onclick=()=> { state.running=true; $("#pauseOverlay").style.display="none"; };
+    $("#btnRestart").onclick=()=>{ if(confirm("確定要重來嗎？本回合分數不會記錄。")){ state.running=false; clearTimer(); startGame(); } };
+    $("#btnFinishEarly").onclick=()=>{
+      if(confirm("確定要結束本回合並看復盤嗎？")){ handleGameOver(); }
+    };
+    $("#btnPauseBackMenu").onclick=()=>{ $("#pauseOverlay").style.display="none"; handleGameOver(); };
+    $("#btnReviewToMenu").onclick=()=>{ initMenuUI(); showPage("pageMenu"); };
+
+    showPage("pageWelcome");
+  </script>
+</body>
+</html>
